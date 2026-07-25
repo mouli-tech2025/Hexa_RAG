@@ -1,0 +1,3 @@
+During takeoff, abnormal vibration was observed in the High Pressure Compressor (HPC).
+Maintenance personnel inspected the engine for Foreign Object Damage (FOD).
+If no FOD is found, inspect the High Pressure Turbine (HPT) according to the Aircraft Maintenance Manual (AMM).

@@ -1,0 +1,8 @@
+    def __init__(self, pipeline_options: ThreadedPdfPipelineOptions) -> None:
+        super().__init__(pipeline_options)
+        self.pipeline_options: ThreadedPdfPipelineOptions = pipeline_options
+        self._run_seq = itertools.count(1)  # deterministic, monotonic run ids
+        self._page_sizes_by_no: dict[int, Size] = {}
+
+        # initialise heavy models once
+        self._init_models()

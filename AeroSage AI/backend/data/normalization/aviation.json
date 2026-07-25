@@ -1,0 +1,19 @@
+{
+  "HPC": "High Pressure Compressor",
+  "LPC": "Low Pressure Compressor",
+  "HPT": "High Pressure Turbine",
+  "LPT": "Low Pressure Turbine",
+  "FOD": "Foreign Object Damage",
+  "EGT": "Exhaust Gas Temperature",
+  "N1": "Low Pressure Spool Speed",
+  "N2": "High Pressure Spool Speed",
+  "FADEC": "Full Authority Digital Engine Control",
+  "APU": "Auxiliary Power Unit",
+  "EEC": "Electronic Engine Control",
+  "MEL": "Minimum Equipment List",
+  "AMM": "Aircraft Maintenance Manual",
+  "ATA": "Air Transport Association",
+  "CFM": "CFM International",
+  "T/O": "Takeoff",
+  "LDG": "Landing"
+}
