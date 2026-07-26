@@ -14,5 +14,8 @@ class TextEmbedder:
     def embed(self, text: str) -> List[float]:
         return self.model.encode(text).tolist()
 
+    def embed_batch(self, texts: List[str], batch_size: int = 32) -> List[List[float]]:
+        return self.model.encode(texts, batch_size=batch_size).tolist()
+
 
 text_embedder = TextEmbedder()

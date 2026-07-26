@@ -2,8 +2,7 @@ import os
 from pathlib import Path
 from typing import List, TypedDict
 
-FAA_DOCS_DIR = "data/faa_docs"
-INCIDENT_REPORTS_DIR = "data/incident_reports"
+from config import FAA_DOCS_DIR, INCIDENT_REPORTS_DIR
 
 ALLOWED_EXTENSIONS = (".txt", ".json")
 FAA_ALLOWED_EXTENSIONS = (".txt", ".pdf")

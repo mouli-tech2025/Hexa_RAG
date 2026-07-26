@@ -1,4 +1,6 @@
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import List
 
 from pypdf import PdfReader
 
@@ -26,41 +28,85 @@ _converter_ocr = DocumentConverter(
 _MIN_EXTRACTED_CHARS = 50
 
 # Empirically found: a single DocumentConverter.convert() call on this
-# Docling version/install starts throwing std::bad_alloc (a native
-# allocator failure, not overall system RAM exhaustion - process RSS was
-# only ~365MB when it first failed) after ~11 pages of work within that
-# one call, regardless of which absolute page it starts on. 8 pages per
-# call was tested clean across multiple consecutive batches. If this is
-# revisited on a different Docling version/install, re-run the same
-# page-count probe before assuming 8 is still safe.
-_PAGE_BATCH_SIZE = 8
+# Docling version/install can throw std::bad_alloc (a native allocator
+# failure, not overall system RAM exhaustion) after roughly ~11 pages of
+# work within that one call. This appears to be non-deterministic (a real
+# 25-page PDF failed on different, varying pages across repeated runs at
+# batch size 8 - not always the same page), so even 8 pages per call is
+# not consistently safe. Dropped to 4 as a larger safety margin. If this
+# is revisited on a different Docling version/install, re-run the same
+# page-count probe before assuming 4 is still safe - and regardless of
+# batch size, per-page failures are now detected and surfaced (see below)
+# rather than assumed away.
+_PAGE_BATCH_SIZE = 4
+
+# If more than this fraction of a document's pages fail extraction, the
+# result is unmistakably incomplete - print a loud warning rather than
+# letting a partial document silently look like a full success.
+_FAILURE_WARNING_THRESHOLD = 0.10
 
 
-def _convert_in_batches(converter: DocumentConverter, path: Path) -> str:
+@dataclass
+class ExtractionResult:
+    text: str
+    total_pages: int
+    failed_pages: List[int] = field(default_factory=list)
+
+    @property
+    def succeeded_pages(self) -> int:
+        return self.total_pages - len(self.failed_pages)
+
+
+def _convert_in_batches(converter: DocumentConverter, path: Path) -> ExtractionResult:
     total_pages = len(PdfReader(str(path)).pages)
 
     batch_texts = []
+    failed_pages: List[int] = []
+
     for start in range(1, total_pages + 1, _PAGE_BATCH_SIZE):
         end = min(start + _PAGE_BATCH_SIZE - 1, total_pages)
         result = converter.convert(str(path), page_range=(start, end))
         batch_texts.append(result.document.export_to_markdown())
 
-    return "\n\n".join(batch_texts)
+        # Docling can silently drop pages within a batch on internal
+        # failures (e.g. std::bad_alloc) without raising a Python
+        # exception - result.status becomes PARTIAL_SUCCESS/FAILURE and
+        # result.pages simply won't contain the missing page numbers.
+        # Detect that here instead of assuming every requested page made
+        # it into the result.
+        succeeded_page_nos = {p.page_no for p in result.pages}
+        for page_no in range(start, end + 1):
+            if page_no in succeeded_page_nos:
+                continue
+            failed_pages.append(page_no)
+            error_messages = [e.error_message for e in result.errors if e.page_no == page_no]
+            detail = f" - {error_messages[0][:150]}" if error_messages else ""
+            print(f"[stage_2_docling] ERROR: '{path.name}' page {page_no} failed extraction{detail}")
+
+    text = "\n\n".join(batch_texts)
+    return ExtractionResult(text=text, total_pages=total_pages, failed_pages=failed_pages)
 
 
-def extract_faa_doc(file_path: str) -> str:
+def extract_faa_doc(file_path: str) -> ExtractionResult:
     path = Path(file_path)
 
     if path.suffix.lower() == ".txt":
-        return path.read_text(encoding="utf-8")
+        text = path.read_text(encoding="utf-8")
+        return ExtractionResult(text=text, total_pages=1, failed_pages=[])
 
-    text = _convert_in_batches(_converter_no_ocr, path)
+    extraction = _convert_in_batches(_converter_no_ocr, path)
 
-    if len(text.strip()) < _MIN_EXTRACTED_CHARS:
+    if len(extraction.text.strip()) < _MIN_EXTRACTED_CHARS:
         print(
             f"[stage_2_docling] '{path.name}': native text-layer extraction yielded only "
-            f"{len(text.strip())} chars - falling back to OCR (likely a scanned PDF)."
+            f"{len(extraction.text.strip())} chars - falling back to OCR (likely a scanned PDF)."
         )
-        text = _convert_in_batches(_converter_ocr, path)
+        extraction = _convert_in_batches(_converter_ocr, path)
 
-    return text
+    if extraction.total_pages and len(extraction.failed_pages) / extraction.total_pages > _FAILURE_WARNING_THRESHOLD:
+        print(
+            f"WARNING: {path.name} - {len(extraction.failed_pages)} of {extraction.total_pages} "
+            f"pages failed extraction, content is incomplete"
+        )
+
+    return extraction

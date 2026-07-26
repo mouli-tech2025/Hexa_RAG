@@ -38,4 +38,19 @@ def normalize_text(text: str, domain: str = "general") -> str:
     terms, pattern = _load_domain(domain)
     if pattern is None:
         return text
-    return pattern.sub(lambda m: terms[m.group(0)], text)
+
+    def _replace(match: re.Match) -> str:
+        abbrev = match.group(0)
+        expansion = terms[abbrev]
+
+        # Don't double-expand when the spelled-out form already precedes
+        # this abbreviation in parens, e.g. "High Pressure Compressor
+        # (HPC)" should stay as-is, not become "... (High Pressure
+        # Compressor)".
+        before = text[: match.start()].rstrip()
+        if before.endswith("(") and before[:-1].rstrip().endswith(expansion):
+            return abbrev
+
+        return expansion
+
+    return pattern.sub(_replace, text)

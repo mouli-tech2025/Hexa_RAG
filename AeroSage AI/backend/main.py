@@ -1,9 +1,7 @@
-from pathlib import Path
-
 from fastapi import FastAPI, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
-from config import APP_NAME, APP_TAGLINE
+from config import APP_NAME, APP_TAGLINE, FAA_DOCS_DIR
 from models import EvidenceCard, HealthResponse, InvestigationRequest, InvestigationResponse
 from stages.stage_5_embed import text_embedder
 from stages.stage_6_actian import actian_db
@@ -70,7 +68,7 @@ def upload_faa_doc(file: UploadFile) -> dict:
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only .pdf files are accepted.")
 
-    dest_path = Path("data/faa_docs") / file.filename
+    dest_path = FAA_DOCS_DIR / file.filename
     with open(dest_path, "wb") as f:
         f.write(file.file.read())
 

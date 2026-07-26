@@ -12,12 +12,14 @@ _splitter = RecursiveCharacterTextSplitter(
 )
 
 
-def chunk_document(text: str, metadata: dict, source_type: str, document_name: str) -> List[dict]:
+def chunk_document(
+    text: str, metadata: dict, source_type: str, document_name: str, domain: str = "aviation"
+) -> List[dict]:
     # No assumption about what keys `metadata` contains - the caller
     # decides what filterable fields matter for their domain (aviation,
     # medical, legal, ...). We just spread it through and layer on the
     # fields this stage itself is responsible for.
-    normalized_text = normalize_text(text)
+    normalized_text = normalize_text(text, domain=domain)
     pieces = _splitter.split_text(normalized_text)
 
     chunks = []

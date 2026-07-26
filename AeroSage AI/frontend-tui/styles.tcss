@@ -1,0 +1,257 @@
+/* AeroSage AI TUI — same palette as the web frontend for consistency:
+   background #0B1220, cards #162031, accent cyan #00C2FF,
+   confidence green/amber/red. */
+
+Screen {
+    background: #0B1220;
+    color: #E6EDF7;
+}
+
+/* ---------- Landing ---------- */
+
+#landing-hero {
+    align: center middle;
+    height: 1fr;
+    padding: 2 4;
+}
+
+#hero-text {
+    text-align: center;
+    text-style: bold;
+    color: #00C2FF;
+    width: 100%;
+    margin-bottom: 1;
+}
+
+#hero-subtitle {
+    text-align: center;
+    color: #8A97AC;
+    width: 100%;
+    margin-bottom: 2;
+}
+
+#badge-row {
+    align: center middle;
+    height: auto;
+    width: 100%;
+    margin-bottom: 2;
+}
+
+.badge {
+    background: #162031;
+    color: #8A97AC;
+    border: round #223049;
+    padding: 0 2;
+    margin: 0 1;
+    height: 3;
+    content-align: center middle;
+}
+
+#pipeline {
+    text-align: center;
+    color: #E6EDF7;
+    width: 100%;
+    margin-bottom: 2;
+}
+
+#start-btn {
+    align-horizontal: center;
+    width: auto;
+}
+
+/* ---------- Investigation form ---------- */
+
+#form-view {
+    padding: 1 4;
+    height: 1fr;
+    overflow-y: auto;
+}
+
+#form-title {
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.form-section {
+    background: #162031;
+    border: round #223049;
+    padding: 1 2;
+    margin-bottom: 1;
+    height: auto;
+}
+
+.section-header {
+    text-style: bold;
+    color: #00C2FF;
+    margin-bottom: 1;
+}
+
+#description {
+    height: 6;
+    border: round #223049;
+}
+
+#submit-btn {
+    margin-top: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ---------- Loading ---------- */
+
+#loading-view {
+    align: center middle;
+    height: 1fr;
+}
+
+LoadingChecklist {
+    width: 50;
+    height: auto;
+    align: center middle;
+}
+
+.checklist-item {
+    background: #162031;
+    border: round #223049;
+    padding: 0 2;
+    margin-bottom: 1;
+    height: 3;
+    content-align: left middle;
+}
+
+/* ---------- Results ---------- */
+
+#results-view {
+    padding: 1 4;
+}
+
+#summary-bar {
+    height: auto;
+    margin-bottom: 2;
+}
+
+ConfidenceBadge {
+    width: auto;
+    height: 3;
+    content-align: center middle;
+    padding: 0 2;
+    border: round #223049;
+    margin-bottom: 1;
+}
+
+ConfidenceBadge.confidence-high {
+    color: #22C55E;
+    border: round #22C55E;
+}
+
+ConfidenceBadge.confidence-medium {
+    color: #F59E0B;
+    border: round #F59E0B;
+}
+
+ConfidenceBadge.confidence-low {
+    color: #EF4444;
+    border: round #EF4444;
+}
+
+#summary-line {
+    color: #8A97AC;
+}
+
+#reasoning-line {
+    color: #E6EDF7;
+    margin-top: 1;
+}
+
+#evidence-title {
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.evidence-card {
+    background: #162031;
+    border: round #223049;
+    padding: 1 2;
+    margin-bottom: 1;
+    height: auto;
+}
+
+.evidence-header {
+    color: #00C2FF;
+    margin-bottom: 1;
+}
+
+.evidence-body {
+    margin-bottom: 1;
+}
+
+.evidence-stats {
+    color: #8A97AC;
+}
+
+#footer-credit {
+    color: #8A97AC;
+    text-align: center;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#back-btn {
+    align-horizontal: center;
+    width: auto;
+    margin-top: 1;
+}
+
+/* ---------- Empty state (calm, not an error) ---------- */
+
+#empty-view {
+    align: center middle;
+    height: 1fr;
+    padding: 2 6;
+}
+
+#empty-title {
+    text-style: bold;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1;
+}
+
+#empty-body {
+    color: #8A97AC;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1;
+}
+
+.empty-suggestion {
+    color: #8A97AC;
+    width: 100%;
+}
+
+/* ---------- Error state (visually distinct: red-bordered) ---------- */
+
+#error-view {
+    align: center middle;
+    height: 1fr;
+    padding: 2 6;
+    border: heavy #EF4444;
+    background: #162031;
+}
+
+#error-title {
+    text-style: bold;
+    color: #EF4444;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1;
+}
+
+#error-body {
+    color: #8A97AC;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1;
+}

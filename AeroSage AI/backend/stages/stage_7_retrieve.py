@@ -10,7 +10,7 @@ from stages.stage_6_actian import actian_db
 
 class Retriever:
     def search(self, query_text: str, metadata_filter: dict, top_k: int = TOP_K_RETRIEVE) -> List[dict]:
-        normalized_query = normalize_text(query_text)
+        normalized_query = normalize_text(query_text, domain="aviation")
         query_vector = text_embedder.embed(normalized_query)
 
         builder = FilterBuilder()
