@@ -1,0 +1,8 @@
+{
+  "event_id": "INC003",
+  "aircraft_model": "B737",
+  "engine_model": "CFM56-7B",
+  "ata_chapter": "72",
+  "component": "Fan Blade",
+  "description": "Hard landing at destination airport resulted in a fan blade-out event on engine 1. Initial vibration N1 indication was 4.2 units above normal. Post-landing inspection confirmed fan blade 14 had fractured at the dovetail root attachment. Fan containment ring showed circumferential scoring consistent with blade contact. FOD screen revealed metallic debris from the fractured blade root. Secondary damage included LPC stage-1 vane nicks and abrasion. The FADEC recorded a sudden N1 dropout from 92% to 78% over 1.2 seconds, followed by automatic engine deceleration via FADEC protection. Maintenance action: replace fan module, LPC stage-1 stator assembly, and fan containment ring per AMM 72-21-00. Return to service after full ground run and vibration survey confirming N1 vibration within limits."
+}

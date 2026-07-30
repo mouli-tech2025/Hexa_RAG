@@ -1,0 +1,8 @@
+{
+  "event_id": "INC002",
+  "aircraft_model": "A320",
+  "engine_model": "CFM56-5B",
+  "ata_chapter": "72",
+  "component": "High Pressure Turbine",
+  "description": "In-flight shutdown (IFSD) of engine 2 occurred at FL350. ECAM displayed ENG 2 FAIL. Post-incident teardown of the HPT revealed a stage-1 nozzle guide vane (NGV) thermal fatigue crack propagating from the trailing edge. The crack measured 18mm in length and penetrated through the ceramic thermal barrier coating into the base superalloy. FADEC data confirmed the EGT had been consistently operating within 8 degrees of the maximum continuous limit over the preceding 400 flight cycles. The IFSD was caused by HPT stage-1 vane fracture leading to secondary damage of the HPT stage-1 rotor blades. Corrective action: replace HPT module per CMM 72-51-00. Root cause attributed to inadequate EGT margin monitoring. Recommended: operator review of EGT trend data at 100-cycle intervals per SB CFM56-5B-72-0532."
+}

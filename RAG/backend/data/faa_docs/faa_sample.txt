@@ -1,0 +1,52 @@
+FAA ADVISORY CIRCULAR AC 43.13-1B
+ACCEPTABLE METHODS, TECHNIQUES, AND PRACTICES — AIRCRAFT INSPECTION AND REPAIR
+Chapter 8: Powerplant Inspection and Maintenance
+
+SECTION 1: TURBINE ENGINE INSPECTION FUNDAMENTALS
+
+8-1. GENERAL INSPECTION REQUIREMENTS.
+All turbine engine inspections must be performed in accordance with the applicable Aircraft Maintenance Manual (AMM) and the engine manufacturer's Component Maintenance Manual (CMM). Inspectors must hold the appropriate FAA Airman Certificate with powerplant rating.
+
+8-2. HIGH PRESSURE COMPRESSOR (HPC) INSPECTION.
+The HPC is a critical rotating assembly that compresses incoming air before combustion. HPC blade inspection shall include:
+(a) Borescope inspection of all blade stages accessible through borescope ports.
+(b) Visual examination for Foreign Object Damage (FOD), erosion, cracks, tip rubs, and corrosion.
+(c) Leading edge and trailing edge inspection for nicks, dents, and tears.
+(d) Any blade damage exceeding limits specified in the Serviceable Limits table of the CMM requires replacement or blending per approved procedures.
+Foreign Object Damage to HPC blades is a significant safety concern. FOD can cause compressor stall, surge, and in severe cases, engine shutdown. FOD screening and inlet inspections after every ground run are mandatory per the applicable maintenance program.
+
+8-3. HIGH PRESSURE TURBINE (HPT) INSPECTION.
+The HPT operates at extremely high temperatures and rotational speeds. HPT inspection intervals are governed by Life Limited Part (LLP) cycle limits and on-condition inspection findings.
+(a) Nozzle Guide Vane (NGV) inspection: Examine for thermal fatigue cracking, oxidation, and erosion. Cracks exceeding the serviceable limits require immediate replacement.
+(b) HPT rotor blade inspection: Borescope inspection for tip cap loss, cooling hole blockage, platform cracking, and airfoil erosion.
+(c) Exhaust Gas Temperature (EGT) margin monitoring: Operators must trend EGT margins at defined intervals. EGT margin below the minimum threshold defined in the applicable Engine Manual is cause for engine removal.
+Thermal fatigue cracking in HPT nozzle guide vanes is the primary life-limiting mechanism for this component. Operating at reduced EGT margin dramatically reduces HPT component life.
+
+8-4. FAN AND LOW PRESSURE COMPRESSOR (LPC) INSPECTION.
+Fan blade inspection is required after any hard landing, bird strike, or suspected FOD event.
+(a) Fan blade visual inspection: Check each blade for leading edge damage, cracks at the dovetail root, and tip damage.
+(b) Fan blade dovetail inspection: Inspect the dovetail slot attachment for fretting, cracking, and corrosion.
+(c) Fan containment ring inspection: After any fan blade fracture event, the containment ring must be replaced per the AMM before return to service.
+(d) LPC stator inspection: After a fan blade-out event, all LPC stator vanes must be inspected for secondary impact damage.
+
+8-5. FADEC AND EEC INSPECTION.
+The Full Authority Digital Engine Control (FADEC) or Electronic Engine Control (EEC) records engine exceedance events. After any EGT exceedance, N1 overspeed, or N2 overspeed event:
+(a) Download FADEC data per the applicable Fault Isolation Manual (FIM).
+(b) Cross-reference exceedance duration and magnitude against the AMM exceedance inspection requirements.
+(c) Perform all mandatory inspections before returning the engine to service.
+(d) Retain FADEC exceedance records per operator record-keeping requirements.
+
+8-6. BORESCOPE INSPECTION PROCEDURES.
+Borescope inspections must be performed by qualified personnel using approved borescope equipment.
+(a) Engine must be cooled to ambient temperature before borescope access ports are opened.
+(b) Illuminate all inspection areas adequately. Use a calibrated video borescope for documentation.
+(c) Document all findings with photographs referenced to blade number, stage, and clock position.
+(d) Compare findings against the applicable CMM serviceable limits before making a disposition decision.
+(e) If any finding is outside serviceable limits, remove the engine from service pending repair or replacement.
+
+8-7. ENGINE GROUND RUN TEST.
+Following any major maintenance action, an engine ground run test is required to confirm return to service.
+(a) Record N1, N2, EGT, fuel flow, and vibration at idle, takeoff, and maximum continuous thrust settings.
+(b) Compare recorded values against approved limits in the AMM.
+(c) EGT margin at flat-rated takeoff thrust must meet the minimum margin specified for the specific engine variant.
+(d) Vibration levels must be within limits at all tested power settings.

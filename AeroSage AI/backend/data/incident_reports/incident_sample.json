@@ -1,7 +1,0 @@
-{
-  "event_id": "INC001",
-  "aircraft_model": "DemoJet-100",
-  "engine_model": "TurboX-200",
-  "ata_chapter": "72",
-  "description": "Engine vibration observed during takeoff. HPC blades showed signs of FOD."
-}

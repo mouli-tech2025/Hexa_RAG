@@ -1,0 +1,8 @@
+{
+  "event_id": "INC001",
+  "aircraft_model": "A320",
+  "engine_model": "CFM56-5B",
+  "ata_chapter": "72",
+  "component": "High Pressure Compressor",
+  "description": "During climb phase at FL180, the crew observed an ECAM warning for EGT exceedance on engine 1. The EGT peaked at 112% of the maximum continuous limit for approximately 4 seconds before returning to normal range. Post-flight borescope inspection of the HPC revealed two stage-3 blades with leading edge erosion consistent with FOD ingestion. Blades showed micro-pitting and surface material loss approximately 0.8mm deep. The FADEC recorded an N2 overspeed event of 101.3% lasting 2.1 seconds. Maintenance action: replace HPC stage 3 blade set per AMM 72-31-00. Aircraft returned to service after replacement and ground run test confirmed normal EGT margin of 42 degrees Celsius below limit."
+}
