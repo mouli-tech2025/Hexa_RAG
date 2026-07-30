@@ -9,11 +9,11 @@ from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling.exceptions import ConversionError
 
-# FAA handbooks/ADs are typically digitally published with a native text
-# layer, not scanned images - OCR (RapidOCR) is ~50-100x slower and adds
-# risk of misreads on text that's already perfect. Try fast text-layer
-# extraction first; only fall back to OCR (loud, not silent) if a PDF
-# turns out to actually be a scanned image with no usable text layer.
+""" FAA handbooks/ADs are typically digitally published with a native text
+layer, not scanned images - OCR (RapidOCR) is ~50-100x slower and adds
+ risk of misreads on text that's already perfect. Try fast text-layer
+ extraction first; only fall back to OCR (loud, not silent) if a PDF
+ turns out to actually be a scanned image with no usable text layer."""
 _no_ocr_options = PdfPipelineOptions(do_ocr=False)
 _converter_no_ocr = DocumentConverter(
     format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=_no_ocr_options)}
@@ -28,22 +28,22 @@ _converter_ocr = DocumentConverter(
 # failed to find a text layer (i.e. the PDF is probably a scanned image).
 _MIN_EXTRACTED_CHARS = 50
 
-# Empirically found: a single DocumentConverter.convert() call on this
-# Docling version/install can throw std::bad_alloc (a native allocator
-# failure, not overall system RAM exhaustion) after roughly ~11 pages of
-# work within that one call. This appears to be non-deterministic (a real
-# 25-page PDF failed on different, varying pages across repeated runs at
-# batch size 8 - not always the same page), so even 8 pages per call is
-# not consistently safe. Dropped to 4 as a larger safety margin. If this
-# is revisited on a different Docling version/install, re-run the same
-# page-count probe before assuming 4 is still safe - and regardless of
-# batch size, per-page failures are now detected and surfaced (see below)
-# rather than assumed away.
+""" Empirically found: a single DocumentConverter.convert() call on this
+ Docling version/install can throw std::bad_alloc (a native allocator
+ failure, not overall system RAM exhaustion) after roughly ~11 pages of
+ work within that one call. This appears to be non-deterministic (a real
+ 25-page PDF failed on different, varying pages across repeated runs at
+ batch size 8 - not always the same page), so even 8 pages per call is
+ not consistently safe. Dropped to 4 as a larger safety margin. If this
+ is revisited on a different Docling version/install, re-run the same
+page-count probe before assuming 4 is still safe - and regardless of
+ batch size, per-page failures are now detected and surfaced (see below)
+rather than assumed away """
 _PAGE_BATCH_SIZE = 4
 
-# If more than this fraction of a document's pages fail extraction, the
-# result is unmistakably incomplete - print a loud warning rather than
-# letting a partial document silently look like a full success.
+"""If more than this fraction of a document's pages fail extraction, the
+result is unmistakably incomplete - print a loud warning rather than
+letting a partial document silently look like a full success."""
 _FAILURE_WARNING_THRESHOLD = 0.10
 
 
